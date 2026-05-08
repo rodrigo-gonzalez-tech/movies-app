@@ -70,7 +70,52 @@ async function displayPopularShows() {
   });
 }
 
-// Display Popular TV Shows
+// Display Movie Details
+async function displayMovieDetails() {
+  const movieId = window.location.search.split("=")[1];
+
+  const movie = await fetchAPIData(`movie/${movieId}`);
+
+  const div = document.createElement("div");
+
+  div.innerHTML = `
+  <div class="details-top">
+          <div>
+            ${
+              movie.poster_path
+                ? `<img
+              src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+              class="card-img-top"
+              alt="${movie.title}"
+            />`
+                : `<img
+              src="images/no-image.jpg"
+              class="card-img-top"
+              alt="${movie.title}"
+            />`
+            }
+          </div>
+          <div>
+            <h2>${movie.title}</h2>
+            <p>
+              <i class="fas fa-star text-primary"></i>
+              ${movie.vote_average.toFixed(1)} / 10
+            </p>
+            <p>Release Date: ${movie.release_date}</p>
+            <p>
+              ${movie.overview}
+            </p>
+            <h4>Genres:</h4>
+            <ul class="list-group">
+              ${movie.genres.map((genre) => `<li>${genre.name}</li>`).join("")}
+            </ul>
+            <p>Runtime: ${movie.runtime} minutes</p>
+          </div>
+        </div>
+  `;
+
+  document.querySelector("#movie-details").appendChild(div);
+}
 
 // Fetch Data From TMDB API
 async function fetchAPIData(endpoint) {
@@ -120,7 +165,7 @@ function init() {
       displayPopularMovies();
       break;
     case "/movie-details.html":
-      console.log("Movie Details");
+      displayMovieDetails();
       break;
     case "/shows.html":
       displayPopularShows();
