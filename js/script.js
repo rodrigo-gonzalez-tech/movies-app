@@ -220,7 +220,7 @@ function initSwiper() {
     loop: true,
     autoplay: {
       delay: 4000,
-      disableOnInteraction: false,
+      disableOnInteraction: true,
     },
     breakpoints: {
       500: {
