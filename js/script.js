@@ -83,6 +83,8 @@ async function displayPopularShows() {
 
 // Display Movie Details
 async function displayMovieDetails() {
+  updateBackButton("movie");
+
   const movieId = window.location.search.split("=")[1];
 
   const movie = await fetchAPIData(`movie/${movieId}`);
@@ -132,6 +134,8 @@ async function displayMovieDetails() {
 
 // Display Show Details
 async function displayShowDetails() {
+  updateBackButton("movie");
+
   const showId = window.location.search.split("=")[1];
 
   const show = await fetchAPIData(`tv/${showId}`);
@@ -209,6 +213,9 @@ async function search() {
   global.search.type = urlParams.get("type");
   global.search.term = urlParams.get("search-term");
 
+  const pageParam = urlParams.get("page");
+  if (pageParam) global.search.page = parseInt(pageParam);
+
   if (global.search.term !== "" && global.search.term !== null) {
     const { results, total_pages, page, total_results } = await searchAPIData();
 
@@ -240,7 +247,7 @@ function displaySearchResults(results) {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
-    <a href="${global.search.type}-details.html?id=${result.id}">
+    <a href="${global.search.type}-details.html?id=${result.id}&from=search&term=${encodeURIComponent(global.search.term)}&page=${global.search.page}">
             ${
               result.poster_path
                 ? `<img
@@ -416,6 +423,19 @@ function showAlert(message, className = "error") {
   setTimeout(() => alertElement.remove(), 2500);
 }
 
+// Update Back Button
+function updateBackButton(type) {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("from") === "search") {
+    const term = urlParams.get("term");
+    const page = urlParams.get("page");
+    const backLink = document.querySelector(".back a");
+    if (backLink) {
+      backLink.href = `search.html?type=${type}&search-term=${encodeURIComponent(term)}&page=${page}`;
+      backLink.textContent = "Back to Search";
+    }
+  }
+}
 // Init App
 function init() {
   switch (global.currentPage) {
