@@ -89,17 +89,17 @@ ul {
 
 .main-header {
   padding: 20px 0;
-  background: var(--background-primary);
-}
-
-.alt-header {
-  background: var(--background-primary);
 }
 
 .main-header .logo {
   color: var(--text-primary);
   font-size: 25px;
   font-weight: 700;
+}
+
+.popular-heading {
+  margin-top: 60px;
+  margin-bottom: 10px;
 }
 
 .main-header ul {
@@ -206,7 +206,8 @@ section h2 {
 /* Slider */
 .swiper {
   width: 90%;
-  height: 50%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .swiper-slide {
@@ -254,9 +255,6 @@ section h2 {
   margin-top: 20px;
 }
 
-.details-bottom {
-}
-
 .details-bottom li {
   margin: 15px 0;
   padding-bottom: 8px;
@@ -264,7 +262,6 @@ section h2 {
 }
 
 .container h2 {
-  margin-top: 60px;
   margin-bottom: 40px;
 }
 
