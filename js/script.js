@@ -1,5 +1,5 @@
 const global = {
-  currentPage: window.location.pathname,
+  currentPage: window.location.pathname.replace("/movielog-app", ""),
   search: {
     term: "",
     type: "",
@@ -21,7 +21,7 @@ async function displayPopularMovies() {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
-    <a href="movie-details.html?id=${movie.id}">
+    <a href="./movie-details.html?id=${movie.id}">
             ${
               movie.poster_path
                 ? `<img
@@ -30,7 +30,7 @@ async function displayPopularMovies() {
               alt="${movie.title}"
             />`
                 : `<img
-              src="images/no-image.jpg"
+              src="./images/no-image.jpg"
               class="card-img-top"
               alt="${movie.title}"
             />`
@@ -55,7 +55,7 @@ async function displayPopularShows() {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
-    <a href="tv-details.html?id=${show.id}">
+    <a href="./tv-details.html?id=${show.id}">
             ${
               show.poster_path
                 ? `<img
@@ -64,7 +64,7 @@ async function displayPopularShows() {
               alt="${show.name}"
             />`
                 : `<img
-              src="images/no-image.jpg"
+              src="./images/no-image.jpg"
               class="card-img-top"
               alt="${show.name}"
             />`
@@ -104,7 +104,7 @@ async function displayMovieDetails() {
               alt="${movie.title}"
             />`
                 : `<img
-              src="images/no-image.jpg"
+              src="./images/no-image.jpg"
               class="card-img-top"
               alt="${movie.title}"
             />`
@@ -155,7 +155,7 @@ async function displayShowDetails() {
               alt="${show.name}"
             />`
                 : `<img
-              src="images/no-image.jpg"
+              src="./images/no-image.jpg"
               class="card-img-top"
               alt="${show.name}"
             />`
@@ -247,7 +247,7 @@ function displaySearchResults(results) {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
-    <a href="${global.search.type}-details.html?id=${result.id}&from=search&term=${encodeURIComponent(global.search.term)}&page=${global.search.page}">
+    <a href="./${global.search.type}-details.html?id=${result.id}&from=search&term=${encodeURIComponent(global.search.term)}&page=${global.search.page}">
             ${
               result.poster_path
                 ? `<img
@@ -256,7 +256,7 @@ function displaySearchResults(results) {
               alt="${global.search.type === "movie" ? result.title : result.name}"
             />`
                 : `<img
-              src="images/no-image.jpg"
+              src="./images/no-image.jpg"
               class="card-img-top"
               alt="${global.search.type === "movie" ? result.title : result.name}"
             />`
@@ -322,7 +322,7 @@ async function displaySlider() {
     const div = document.createElement("div");
     div.classList.add("swiper-slide");
     div.innerHTML = `
-    <a href="movie-details.html?id=${movie.id}">
+    <a href="./movie-details.html?id=${movie.id}">
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
     </a>
     <h4 class="swiper-rating">
@@ -405,8 +405,11 @@ function hideSpinner() {
 // Highlight Active Page Link
 function highlightActiveLink() {
   const links = document.querySelectorAll(".nav-link");
+
   links.forEach((link) => {
-    if (link.getAttribute("href") === global.currentPage) {
+    const linkPath = link.getAttribute("href").replace("./", "/");
+
+    if (linkPath === global.currentPage) {
       link.classList.add("active");
     }
   });
@@ -431,7 +434,7 @@ function updateBackButton(type) {
     const page = urlParams.get("page");
     const backLink = document.querySelector(".back a");
     if (backLink) {
-      backLink.href = `search.html?type=${type}&search-term=${encodeURIComponent(term)}&page=${page}`;
+      backLink.href = `./search.html?type=${type}&search-term=${encodeURIComponent(term)}&page=${page}`;
       backLink.textContent = "Back to Search";
     }
   }
