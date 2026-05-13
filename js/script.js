@@ -8,8 +8,8 @@ const global = {
     totalResults: 0,
   },
   api: {
-    apiKey: "03ed3d1fc5098573034f4399c3d963eb",
-    apiUrl: "https://api.themoviedb.org/3/",
+    apiKey: "03ed3d1fc5098573034f4399c3d963eb", // not good practice but keeping it simple for this project
+    apiUrl: "https://api.themoviedb.org/3/", // anyone can get a free public API key
   },
 };
 
