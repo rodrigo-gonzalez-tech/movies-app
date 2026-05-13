@@ -4,7 +4,7 @@ A movie and TV show catalog web app built with vanilla JavaScript using the TMDB
 
 The app lets users browse popular movies and TV shows, search for specific titles, and view detailed information about each result.
 
-[Check it out!](https://rodrigo-gonzalez-tech.github.io/movielog-app/)
+<!--[Check it out!](https://rodrigo-gonzalez-tech.github.io/movielog-app/)-->
 
 ## Preview
 
